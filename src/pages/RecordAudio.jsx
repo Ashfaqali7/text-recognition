@@ -1,8 +1,9 @@
 import React, { useState, useRef } from 'react';
 import Button from '@mui/material/Button';
 import { Grid } from '@mui/material';
+import { analyzeTranscript } from '../services/openAIServices';
 
-const AudioToText = () => {
+const AudioToText = ({ updateRes }) => {
     const [isRecording, setIsRecording] = useState(false);
     const [transcripts, setTranscripts] = useState([]);
     const mediaRecorderRef = useRef(null);
@@ -31,7 +32,7 @@ const AudioToText = () => {
                 if (event.data.size > 0) {
                     const audioBlob = new Blob([event.data], { type: 'audio/wav' });
                     // Handle the recorded audio blob as needed (e.g., save to server or state)
-                    console.log('Recorded Audio Blob:', audioBlob);
+                    // console.log('Recorded Audio Blob:', audioBlob);
                 }
             };
 
@@ -65,7 +66,11 @@ const AudioToText = () => {
             console.error('Error accessing microphone:', error);
         }
     };
-
+    const analyizeTrans = async () => {
+        const res = await analyzeTranscript(transcripts)
+        const result = JSON.parse(res || "{}")
+        updateRes(result)
+    }
     const stopRecording = () => {
         if (mediaRecorderRef.current) {
             mediaRecorderRef.current.stop();
@@ -74,6 +79,7 @@ const AudioToText = () => {
             recognitionRef.current.stop();
         }
         setIsRecording(false);
+        analyizeTrans()
     };
     const formatTime = (timestamp) => {
         const date = new Date(timestamp);
