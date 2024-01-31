@@ -5,7 +5,7 @@ import Conversations from './Conversations';
 
 function MainPage() {
     return (
-        <Grid container padding={2} width={"100%"}>
+        <Grid container marginTop={70} padding={2} width={"100%"}>
             <Grid item xs={4}>
                 <Records />
             </Grid>
