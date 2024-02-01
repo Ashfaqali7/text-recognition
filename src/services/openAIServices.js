@@ -1,5 +1,6 @@
 
-const apiKey = "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";
+const apiKey = "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";
+// const apiKey = "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";
 const prompt = `Below I will give a conversation between doctor and patient you have to do following,
 - "First Identify the Doctors speech and Patient speech"
 - "Second extract the Subjective as subjective"

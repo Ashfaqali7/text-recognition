@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import Button from '@mui/material/Button';
 import { Grid } from '@mui/material';
 import { analyzeTranscript } from '../services/openAIServices';
-
+import MicIcon from '@mui/icons-material/Mic';
 const AudioToText = ({ updateRes }) => {
     const [isRecording, setIsRecording] = useState(false);
     const [transcripts, setTranscripts] = useState([]);
@@ -100,7 +100,7 @@ const AudioToText = ({ updateRes }) => {
                 <h2>Listening</h2>
                 <p>Keep this screen open while speaking to your patient.</p>
             </> : null}
-            <Button sx={{ borderRadius: 50 }} variant="contained" color='grey' onClick={handleToggleRecording}>
+            <Button sx={{ borderRadius: 50 }} startIcon={isRecording ? null : <MicIcon />} variant="contained" color='grey' onClick={handleToggleRecording}>
                 {isRecording ? 'END VISIT' : ' CAPTURE CONVERSATION'}
             </Button>
             <Grid padding={2} item xs={12}>
